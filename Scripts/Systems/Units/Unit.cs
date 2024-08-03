@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,39 +9,19 @@ public class Unit : MonoBehaviour
 {
     public UnitState state;
     public GameObject target;
-    private TextMeshPro stanceText;
+    public TextMeshPro stanceText;
     public GameObject awarenessSphere;
     public GameObject engageSphere;
-    private GameObject body;
+    public GameObject body;
     public NavMeshAgent navMeshAgent; // Add a reference to the NavMeshAgent component
-    static List<Color> colors = new List<Color> { Color.red, Color.blue, Color.green, Color.yellow, Color.cyan, Color.magenta, Color.white, Color.black, Color.gray };
-    void Awake()
-    {
-        SubscribeToAwakeEvents();
-        FindUnitGameObjects();
-        state = new HoldingState(this);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        state.Update();
-        state.SetStance();
-        UpdateStanceText();
-    }
-
-    void OnDestroy() =>  UnitManager.OnSetStance -= SetStance;
-    
-    public void SetStance()
-    {
-        state.SetStance();
-        UpdateStanceText();
-    }
+    public TextMeshPro healthText;
+    public TextMeshPro powerText;
+    public TextMeshPro attackSpeedText;
+    public event Action OnDeath;
+    public int power = 20;
+    public int health = 10;
+    public float attackSpeed = 5f;
+        
     public int UnitsInSphere(GameObject sphere){
         Collider[] colliders = Physics.OverlapSphere(sphere.transform.position, sphere.transform.Find("Sphere").localScale.x / 2);
         int sum = 0;
@@ -71,11 +52,27 @@ public class Unit : MonoBehaviour
 
         return closestUnit;
     }
+    public void SetStance() => state.SetState();
 
-    public void UpdateStanceText()
+    private void Awake()
     {
-        stanceText.text = state.GetType().Name;
+        SubscribeToAwakeEvents();
+        FindUnitGameObjects();
+        state = new HoldingState(this);
     }
+
+    private void Start(){}
+
+    private void Update()
+    {
+        if(health <= 0)
+            Death();
+
+        state.Update();
+        state.SetState();
+    }
+
+    private void OnDestroy() =>  UnitManager.OnSetStance -= SetStance;
 
     private void SubscribeToAwakeEvents()
     {
@@ -88,8 +85,34 @@ public class Unit : MonoBehaviour
         engageSphere = transform.Find("EngageSphere").gameObject;
         body = transform.Find("Body").gameObject;
         navMeshAgent = GetComponent<NavMeshAgent>();
+        healthText = transform.Find("Health").GetComponent<TextMeshPro>();
+        powerText = transform.Find("Power").GetComponent<TextMeshPro>();
+        attackSpeedText = transform.Find("AttackSpeed").GetComponent<TextMeshPro>();
     }
 
+    public void Death()
+    {
+        OnDeath?.Invoke();
+        Destroy(gameObject);
+    }
+
+    public void UpdateUI()
+    {
+        if(stanceText == null)
+            return;
+            
+        healthText.text = "Health: " + health;
+        powerText.text = "Power: " + power;
+        attackSpeedText.text = "Attack Speed: " + attackSpeed;
+
+        Vector3 cameraPosition = Camera.main.transform.position;
+        Vector3 lookDirection = cameraPosition - transform.position;
+        Quaternion rotation = Quaternion.LookRotation(lookDirection);
+        stanceText.transform.rotation = rotation * Quaternion.Euler(0, 180, 0);
+        healthText.transform.rotation = rotation * Quaternion.Euler(0, 180, 0);
+        powerText.transform.rotation = rotation * Quaternion.Euler(0, 180, 0);
+        attackSpeedText.transform.rotation = rotation * Quaternion.Euler(0, 180, 0);
+    }
 
     
 }

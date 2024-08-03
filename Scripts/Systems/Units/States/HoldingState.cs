@@ -10,7 +10,7 @@ public class HoldingState : UnitState
     {
     }
 
-    public override void SetStance(){
+    public override void SetState(){
         if(unit.UnitsInSphere(unit.awarenessSphere) > 0)
             unit.state = new TrackingState(unit);
         
@@ -20,6 +20,14 @@ public class HoldingState : UnitState
     }
 
     public override void Update(){
+
     }
+
+    public override void UpdateStateUI(){
+        unit.stanceText.text = "Holding";
+        unit.stanceText.color = Color.blue;
+    }
+
+    
     
 }

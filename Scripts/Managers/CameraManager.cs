@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    public float speed = 10.0f;
+    public float speed = 25.0f;
     public float sensitivity = 5.0f;
     private float rotationX = 0.0f;
     private float rotationY = 0.0f;

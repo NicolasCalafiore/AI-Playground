@@ -11,9 +11,12 @@ public abstract class UnitState
     public UnitState(Unit unit)
     {
         this.unit = unit;
+        UpdateStateUI();
+        unit.UpdateUI();
     }
 
-    public abstract void SetStance();
+    public abstract void SetState();
     public abstract void Update();
-
+    public abstract void UpdateStateUI();
+    
 }

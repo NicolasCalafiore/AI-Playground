@@ -14,7 +14,7 @@ public class TrackingState : UnitState
 
     }
 
-    public override void SetStance(){
+    public override void SetState(){
         if(unit.UnitsInSphere(unit.awarenessSphere) == 0)
             unit.state = new HoldingState(unit);
         
@@ -25,5 +25,11 @@ public class TrackingState : UnitState
 
     public override void Update(){
         unit.navMeshAgent.SetDestination(unit.target.transform.position);
+    }
+
+    
+    public override void UpdateStateUI(){
+        unit.stanceText.text = "Tracking";
+        unit.stanceText.color = Color.yellow;
     }
 }
