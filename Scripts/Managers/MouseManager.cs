@@ -19,9 +19,7 @@ public class MouseManager : MonoBehaviour
                 // Check if the object hit has the tag "unit"
                 if (hit.collider.CompareTag("Unit"))
                 {
-                    // Print the name of the object
-                    Debug.Log("Clicked on unit: " + hit.collider.gameObject.name);
-                    Debug.Log("Units In Range: " + hit.collider.gameObject.GetComponent<Unit>().UnitsInAwareness());
+
                 }
             }
         }
