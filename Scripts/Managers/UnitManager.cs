@@ -4,28 +4,46 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UnitManager : MonoBehaviour
-{
-    public static UnitManager instance;
-    public static event Action OnSetStance;
+{  
+    [SerializeField] Vector2 size;
+    [SerializeField] int maxUnits;
+    List<GameObject> units = new List<GameObject>();
+    [SerializeField] public int numberOfTeams;
+    private Dictionary<int, Color> teamColors = new Dictionary<int, Color>();
+    void Awake(){
+        Debug.Log("UnitManager Awake");
 
-    public void Awake(){
-        instance = this;
-         
+        teamColors.Add(0, Color.red);
+        teamColors.Add(1, Color.blue);
+        teamColors.Add(2, Color.green);
+        teamColors.Add(3, Color.yellow);
+        teamColors.Add(4, Color.magenta);
+        teamColors.Add(5, Color.cyan);
+        teamColors.Add(6, Color.grey);
+        teamColors.Add(7, Color.black);
+        teamColors.Add(8, Color.white);
+        
     }
+
+
+    void Start(){
+        Debug.Log("UnitManager Start");
+        for(int i = 0; i < maxUnits; i++){
+            GameObject prefab = Resources.Load<GameObject>("Prefabs/Unit");
+            GameObject unit = Instantiate(prefab, new Vector3(UnityEngine.Random.Range(0, size.x), 0, UnityEngine.Random.Range(0, size.y)), Quaternion.identity);
+            units.Add(unit);
+
+
+
+            unit.GetComponent<AI>().team = UnityEngine.Random.Range(0, numberOfTeams);
+            unit.GetComponent<AI>().teamColor = teamColors[unit.GetComponent<AI>().team];
+        }
+    }
+
 
     public void SpawnUnit(){
-        GameObject unit = Resources.Load<GameObject>("Prefabs/Unit");
-        Instantiate(unit);
-        unit.GetComponent<Unit>().power = UnityEngine.Random.Range(1, 25);
-        unit.GetComponent<Unit>().health = UnityEngine.Random.Range(50, 100);
-        unit.GetComponent<Unit>().attackSpeed = UnityEngine.Random.Range(1, 10);
-        float randomX = UnityEngine.Random.Range(0, 1000);
-        float randomZ = UnityEngine.Random.Range(0, 1000);
-        unit.transform.position = new Vector3(randomX, 0, randomZ);
-    
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/Unit");
+        GameObject unit = Instantiate(prefab, new Vector3(UnityEngine.Random.Range(0, size.x), 0, UnityEngine.Random.Range(0, size.y)), Quaternion.identity);
+        units.Add(unit);
     }   
-    public void SetStance(){
-        OnSetStance?.Invoke();
-    }
-
 }
