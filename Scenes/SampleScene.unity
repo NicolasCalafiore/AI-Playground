@@ -445,8 +445,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 642df3c5af028994d9e131ab301ddaf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 100, y: 100}
-  maxUnits: 10
+  size: {x: 50, y: 50}
+  maxUnits: 2
+  numberOfTeams: 0
 --- !u!4 &722655336
 Transform:
   m_ObjectHideFlags: 0

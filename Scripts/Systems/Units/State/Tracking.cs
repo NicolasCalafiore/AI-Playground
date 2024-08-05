@@ -11,7 +11,6 @@ public class Tracking : AIState
 
     public override void Update(){
         if(ai.target == null) return;
-        Debug.Log("Tracking");
         ai.navAgent.SetDestination(ai.target.transform.position);
     }
 

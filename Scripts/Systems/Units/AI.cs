@@ -19,6 +19,7 @@ public class AI : MonoBehaviour
     TextMeshPro IDText;
     TextMeshPro HealthText;
     TextMeshPro APASText;
+    TextMeshPro BStrength;
     public GameObject awareSphere;
     public GameObject engageSphere;
     public GameObject body;
@@ -69,6 +70,7 @@ public class AI : MonoBehaviour
         engageSphere = transform.Find("EngageSphere").transform.Find("Sphere").gameObject;
         HealthText = transform.Find("Health").GetComponent<TextMeshPro>();
         APASText = transform.Find("APAS").GetComponent<TextMeshPro>();
+        BStrength = transform.Find("BStrength").GetComponent<TextMeshPro>();
 
 
     }
@@ -78,6 +80,13 @@ public class AI : MonoBehaviour
         IDText.text = id.ToString();
         HealthText.text = health.ToString();
         APASText.text = attackDamage.ToString() + " " + attackSpeed.ToString();
+        BStrength.text = state.outputValue.ToString();
+        
+        Vector3 cameraPosition = Camera.main.transform.position;
+        StateText.transform.LookAt(-cameraPosition);
+        IDText.transform.LookAt(-cameraPosition);
+        HealthText.transform.LookAt(-cameraPosition);
+        APASText.transform.LookAt(-cameraPosition);
         
     }
 }

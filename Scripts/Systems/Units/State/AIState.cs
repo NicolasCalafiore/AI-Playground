@@ -9,6 +9,8 @@ public abstract class AIState
     public AI ai;
     public IdleRoutines idleRoutines = new IdleRoutines();
     public EngageRoutines engageRoutines = new EngageRoutines();
+    public FleeRoutines fleeRoutines = new FleeRoutines();
+    public int outputValue = 0;
     
     public AIState(AI ai){
         this.ai = ai;
