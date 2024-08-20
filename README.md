@@ -1,5 +1,5 @@
 # Description
-For this project I choose to focus on developing state machines for simple AI practice. I plan on making a basic city simulation.
+For this project I choose to focus on developing state machines for simple AI practice. I plan on making a basic city simulation where units follow routines based off of their current state.
 
 # Pictures
 ### > 8/19/2024
