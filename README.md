@@ -3,7 +3,7 @@ For this project I choose to focus on developing state machines for simple AI pr
 
 # Pictures
 ### > 8/19/2024
-![Uploading Untitledvideo-MadewithClipchamp2-ezgif.com-video-to-gif-converter.gif…]()
+![Untitledvideo-MadewithClipchamp2-ezgif.com-video-to-gif-converter.gif…]()
 
 
 
