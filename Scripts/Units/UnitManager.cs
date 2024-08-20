@@ -7,6 +7,7 @@ public class UnitManager : MonoBehaviour
 {
     [SerializeField] private int unitCount;
     [SerializeField] private int policeCount;
+    [SerializeField] private int cookCount;
     [SerializeField] private Vector2 spawnRange;
     public static UnitManager instance;
     public List<Unit> units = new List<Unit>();
@@ -30,7 +31,7 @@ public class UnitManager : MonoBehaviour
             Vector3 spawnPosition = GetValidSpawnPosition();
             GameObject unitObject = Instantiate(IOManager.GetUnitPrefab(), spawnPosition, Quaternion.identity);
             Unit unit = unitObject.GetComponent<Unit>();
-            unit.SetJob(Job.None);
+            unit.SetJob(new None());
             units.Add(unit);
         }
 
@@ -39,7 +40,16 @@ public class UnitManager : MonoBehaviour
             Vector3 spawnPosition = GetValidSpawnPosition();
             GameObject unitObject = Instantiate(IOManager.GetUnitPrefab(), spawnPosition, Quaternion.identity);
             Unit unit = unitObject.GetComponent<Unit>();
-            unit.SetJob(Job.Police);
+            unit.SetJob(new Police());
+            units.Add(unit);
+        }
+
+        for (int i = 0; i < cookCount; i++)
+        {
+            Vector3 spawnPosition = GetValidSpawnPosition();
+            GameObject unitObject = Instantiate(IOManager.GetUnitPrefab(), spawnPosition, Quaternion.identity);
+            Unit unit = unitObject.GetComponent<Unit>();
+            unit.SetJob(new Cook());
             units.Add(unit);
         }
 

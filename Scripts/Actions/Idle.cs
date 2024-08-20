@@ -13,7 +13,7 @@ public class Idle : Action
     public Idle(Unit unit) : base(unit){
         isDone = false;
         target = UnitUtils.GetRandomLocationInRadius(unit.transform.position, 20);
-         unit.transform.Find("Body").GetComponent<MeshRenderer>().material.color = Color.cyan;
+        unit.transform.Find("Body").GetComponent<MeshRenderer>().material.color = Color.cyan;
     }
 
     public override void Execute(){
@@ -22,7 +22,7 @@ public class Idle : Action
 
     public override void Update(){
 
-        if (unit.GetComponent<Unit>().agent.remainingDistance <= .5f)
+        if (Vector3.Distance(unit.transform.position, target) <= 2)
             PointReached();
 
         Tick();

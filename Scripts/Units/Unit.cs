@@ -10,7 +10,7 @@ public class Unit : MonoBehaviour
 
     public GameObject house;
     public NavMeshAgent agent;
-    public Job job = Job.None;
+    public Job job = null;
     [SerializeField] public int happiness = 50;
     [SerializeField] public int money = 0;
     [SerializeField] public int nourishment;
@@ -19,17 +19,15 @@ public class Unit : MonoBehaviour
     [SerializeField] public int noruishmentDX;
     [SerializeField] public int energyDX;
     [SerializeField] public int socialDX;
+    [SerializeField] public string jobstr;
     public static int StatUpdateInterval = 3;
     public ActionManager actionManager;
     [SerializeField] private string state;
     [SerializeField] public bool Socializable;
+    int baseSpeed = 5;
 
     public void SetJob(Job job){
         this.job = job;
-
-        if(job == Job.Police){
-            gameObject.transform.Find("PoliceOutfit").gameObject.SetActive(true);
-        }
     }
 
     void Start()
@@ -43,6 +41,14 @@ public class Unit : MonoBehaviour
 
     void Update()
     {
+        if( job != null)
+            jobstr = job.GetType().Name;
+            
+        if (job != null && job.startHour <= TimeManager.instance.hour && TimeManager.instance.hour <= job.endHour && actionManager.action.GetType().Name != "Working") {
+            actionManager.SetAction();
+        }
+        
+        agent.speed = baseSpeed * TimeManager.UniversalGameSpeed;
         actionManager.Update();
 
         state = actionManager.action.GetType().Name;
@@ -61,13 +67,13 @@ public class Unit : MonoBehaviour
     }
 
     void GenerateStats(){
-        nourishment = UnityEngine.Random.Range(50, 100);
-        energy = UnityEngine.Random.Range(50, 100);
-        social = UnityEngine.Random.Range(50, 100);
+        nourishment = UnityEngine.Random.Range(0, 100);
+        energy = UnityEngine.Random.Range(0, 100);
+        social = UnityEngine.Random.Range(0, 100);
 
-        noruishmentDX = UnityEngine.Random.Range(1, 5);
-        energyDX = UnityEngine.Random.Range(1, 5);
-        socialDX = UnityEngine.Random.Range(1, 5);
+        noruishmentDX = UnityEngine.Random.Range(1, 3);
+        energyDX = UnityEngine.Random.Range(1, 3);
+        socialDX = UnityEngine.Random.Range(1, 3);
 
     }
 
@@ -75,11 +81,11 @@ public class Unit : MonoBehaviour
         while (true){
             yield return new WaitForSeconds(StatUpdateInterval);
             if(actionManager.action.GetType().Name != "Eat")
-            nourishment -= noruishmentDX;
+                nourishment -= noruishmentDX * (int) TimeManager.UniversalGameSpeed;
             if(actionManager.action.GetType().Name != "Sleep")
-                energy -= energyDX;
+                energy -= energyDX * (int) TimeManager.UniversalGameSpeed;
             if(actionManager.action.GetType().Name != "Socialize")
-                social -= socialDX;
+                social -= socialDX * (int) TimeManager.UniversalGameSpeed;
         }
     }
 

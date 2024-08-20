@@ -8,9 +8,9 @@ public class Socialize : Action
     public Vector3 target;
     private float timeSinceLastUpdate = 0f;
     private float updateInterval = 2f;
-    private int socializeStrength = UnitUtils.GetRandomInt(5, 15);
+    private int socializeStrength = UnitUtils.GetRandomInt(10, 20);
     public override int Priority {get{return 1;}}
-    public override int SatisfactionLevel {get{return 75;}}
+    public override int SatisfactionLevel {get{return UnityEngine.Random.Range(60, 100);}}
     public bool isAtCenter = false;
     public bool isSatisfied = false;
     public int socialize_radius = 15;

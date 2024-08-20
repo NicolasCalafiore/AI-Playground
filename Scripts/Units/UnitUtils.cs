@@ -61,12 +61,35 @@ public static class UnitUtils
     }   
 
     public static Vector3 GetRandomLocationInRadius(Vector3 origin, float radius){
-        Vector3 randomDirection = Random.insideUnitSphere * radius;
-        randomDirection += origin;
+        Vector3 randomPosition = Vector3.zero;
         NavMeshHit hit;
-        NavMesh.SamplePosition(randomDirection, out hit, radius, 1);
-        return hit.position;
+        bool positionIsValid = false;
+        float safeDistanceFromEdge = 1f; // Distance from the edge of the NavMesh
+
+        do {
+            Vector3 randomDirection = Random.insideUnitSphere * radius;
+            randomDirection += origin;
+
+            if (NavMesh.SamplePosition(randomDirection, out hit, radius, NavMesh.AllAreas)) {
+                randomPosition = hit.position;
+
+                // Additional check: ensure the position is not too close to the edge of the NavMesh
+                if (NavMesh.Raycast(randomPosition, randomPosition + Vector3.forward * safeDistanceFromEdge, out NavMeshHit edgeHit, NavMesh.AllAreas) ||
+                    NavMesh.Raycast(randomPosition, randomPosition + Vector3.right * safeDistanceFromEdge, out edgeHit, NavMesh.AllAreas)) {
+                    // If too close to the edge, continue the loop
+                    continue;
+                }
+
+                Collider[] colliders = Physics.OverlapSphere(randomPosition, 1f);
+                if (colliders.Length == 1) {
+                    positionIsValid = true;
+                }
+            }
+        } while (!positionIsValid);
+
+        return randomPosition;
     }
+
 
 
     public static float GetRandomFloat(float min = 0, float max = 100) => UnityEngine.Random.Range(min, max);

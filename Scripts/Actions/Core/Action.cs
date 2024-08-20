@@ -21,7 +21,7 @@ public abstract class Action
     public abstract void Tick();
     public void Stop(){
         unit.GetComponent<Unit>().agent.ResetPath();
-        unit.GetComponent<Unit>().agent.velocity = Vector3.zero;
+        unit.GetComponent<Unit>().agent.speed = 0;
     }
 
 }

@@ -6,14 +6,14 @@ public class Eat : Action
 {
     private float timeSinceLastUpdate = 0f;
     private float updateInterval = 2f;
-    private int interval = UnitUtils.GetRandomInt(5, 15);
+    private int interval = UnitUtils.GetRandomInt(10, 20);
 
     public Vector3 target;
     public override int Priority {get{return 1;}}
-    public override int SatisfactionLevel {get{return 100;}}
+    public override int SatisfactionLevel {get{return UnityEngine.Random.Range(60, 100);}}
     bool isAtResturant = false;
     bool isFull;
-    int resturantRadius = 5;
+    int resturantRadius = 2;
     int fullTarget = 75;
 
     public Eat(Unit unit) : base(unit){

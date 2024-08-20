@@ -10,6 +10,9 @@ public class ActionManager
     public Action action;
     private float timeSinceLastUpdate = 0f;
     private float updateInterval = 2f;
+    private int energy_threshold = UnityEngine.Random.Range(15, 30);
+    private int nourishment_threshold = UnityEngine.Random.Range(20, 50);
+    private int social_threshold = UnityEngine.Random.Range(5, 60);
 
     public ActionManager(Unit unit){
         this.unit = unit;
@@ -17,14 +20,22 @@ public class ActionManager
 
     public void SetAction(){
 
-        if(unit.GetComponent<Unit>().energy < 20)
+        if(unit.job != null && unit.GetComponent<Unit>().job.startHour <= TimeManager.instance.hour && TimeManager.instance.hour <= unit.GetComponent<Unit>().job.endHour){
+            action = new Working(unit);
+            action.Execute();
+            return;
+        }
+
+        if(unit.GetComponent<Unit>().energy < energy_threshold)
             action = new Sleep(unit);
         
-        else if(unit.GetComponent<Unit>().nourishment < 50)
+        else if(unit.GetComponent<Unit>().nourishment < nourishment_threshold)
             action = new Eat(unit);
         
         else  
             action = new Idle(unit);
+
+            
         
 
         action.Execute();
@@ -39,7 +50,7 @@ public class ActionManager
         timeSinceLastUpdate += Time.deltaTime;
         if (timeSinceLastUpdate >= updateInterval)
         {
-            if(action.GetType().Name == "Idle" && unit.social < 25){
+            if(action.GetType().Name == "Idle" && unit.social < social_threshold){
                 action = new Socialize(unit);
                 action.Execute();
             }
