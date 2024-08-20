@@ -1,7 +1,15 @@
 # Description
-For this project I choose to focus on developing state machines for simple AI practice. Each Unit can idle, track, engage, and flee. 
+For this project I choose to focus on developing state machines for simple AI practice. I plan on making a basic city simulation.
 
 # Pictures
+### > 8/19/2024
+![Uploading Untitledvideo-MadewithClipchamp2-ezgif.com-video-to-gif-converter.gif…]()
+
+
+
+
+
+### < 8/19/2024
 ## Layout
 ![Screenshot 2024-08-15 165109](https://github.com/user-attachments/assets/b490fe91-9cae-4921-8407-11030e1778e5)
 
