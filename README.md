@@ -3,7 +3,9 @@ For this project I choose to focus on developing state machines for simple AI pr
 
 # Pictures
 ### > 8/19/2024
-![Untitledvideo-MadewithClipchamp2-ezgif.com-video-to-gif-converter.gif…]()
+Uploading Untitled video - Made with Clipchamp (2).mp4…
+
+
 
 
 
