@@ -23,18 +23,13 @@ public class Unit : MonoBehaviour
     public Job job;
 
     void Awake(){
-        job = new Unemployed(gameObject);
-
+        job = null;
         FindComponents();
         needs = new Needs();
         _ActivityManager.SetActivity();
 
         if(!UnitUtils.FindHousing(gameObject))
             Destroy(gameObject);
-        
-
-
-
     }
 
     void Start()
@@ -47,18 +42,23 @@ public class Unit : MonoBehaviour
     {
         DebugOverrides();
 
-        if(job is not Unemployed && !job.isWorking && TimeManager.instance.hour >= job.StartHour && TimeManager.instance.hour < job.EndHour)
+        if(job is not null && !job.isWorking && TimeManager.instance.hour >= job.StartHour && TimeManager.instance.hour < job.EndHour)
             _ActivityManager.SetActivity();
 
         _ActivityManager.Update();
         needs.Update();
     }
+
     void DebugOverrides(){
+
         Social_Debug = needs.Social;
         Hunger_Debug = needs.Hunger;
         Sleep_Debug = needs.Sleep;
 
-        jobStr = job.GetType().Name;
+        if(job == null) jobStr = "Unemployed";
+        else
+            jobStr = job.GetType().Name;
+            
         activity = _ActivityManager.CurrentActivity.GetType().Name;
 
         if(MakeHungry)
@@ -73,32 +73,38 @@ public class Unit : MonoBehaviour
         MakeSleepy = false;
         MakeSocial = false;
     }
+
     void FindComponents(){
+
         Agent = GetComponent<NavMeshAgent>();
         _ActivityManager = new ActivityManager(this);
     }
+
     public void SetHome(GameObject home){
+
         this.Home = home;
     }
 
-    public GameObject GetHome(){
-        return Home;
-    }
-
     public void MoveToStructure(GameObject structure){
-        targetStructure = structure;
+
         Agent.SetDestination(structure.transform.Find("Door").position);
+        Agent.SetDestination(structure.transform.Find("Door").position);
+        targetStructure = structure;
     }
 
     public Vector3 StructureDoorPosition(GameObject structure){
+
         return structure.transform.Find("Door").position;
     }
 
     public void MoveToPosition(Vector3 position){
+
         Agent.SetDestination(position);
     }
 
     public void EnterStructure(GameObject structureGO){
+  
+
         Structure structure = structureGO.GetComponent<Structure>();
         SetVisiblity(false);
         structure.AddOccupant(gameObject);
@@ -106,16 +112,22 @@ public class Unit : MonoBehaviour
     }
 
     public void ExitStructure(){
+
+
         occupiedStructure.RemoveOccupant(gameObject);
         SetVisiblity(true);
     }
 
     public void Stop(){
+
+
         Agent.ResetPath();
         Agent.speed = 0;
     }
 
     public void WearOutfit(bool isWearing){
+
+
         if(isWearing){
             GameObject outfit = Instantiate(job.Outfit);
             outfit.transform.SetParent(transform);
@@ -131,6 +143,8 @@ public class Unit : MonoBehaviour
     }
 
     void SetVisiblity(bool visible){
+
+
         if(visible){
             foreach (Transform child in transform)
             {
@@ -143,6 +157,10 @@ public class Unit : MonoBehaviour
                 child.gameObject.SetActive(false);
             }
         }
+    }
+
+    public GameObject GetHome(){
+        return Home;
     }
 
 }

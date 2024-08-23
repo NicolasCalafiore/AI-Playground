@@ -13,14 +13,20 @@ public class Police : Job
         JobLocation = GameObject.FindWithTag("Police");
     }
 
-    public void FindTask(){
+    public override void FindTask(){
+        CurrentTask = new JobTask(UnitUtils.GetRandomLocationInRadius(Actor.transform.position, 50), 5, Actor, 1);
+        CurrentTask.Execute();
+    }
+
+    public override void Update(){
+        if(CurrentTask == null)
+            FindTask();
         
+        CurrentTask.Update();
+
+        if(CurrentTask.isComplete){
+            FindTask();
+        }
     }
-
-    public void Update(){
-
-    }
-
-
     
 }

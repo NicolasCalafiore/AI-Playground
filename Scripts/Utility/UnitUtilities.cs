@@ -27,12 +27,9 @@ public static class UnitUtils
         } while (!positionIsValid);
 
         return spawnPosition;
-
-   
     }
 
     public static bool FindHousing(GameObject unit){
-
         foreach(GameObject houseGO in WorldRegister.GetStructures()){
             Structure house = houseGO.GetComponent<Structure>();
         
@@ -76,9 +73,7 @@ public static class UnitUtils
         return randomPosition;
     }
 
-
     public static GameObject FindClosestTag(Unit unit, string tag){
-        
         GameObject[] objects = GameObject.FindGameObjectsWithTag(tag);
         GameObject closest = null;
         float distance = Mathf.Infinity;

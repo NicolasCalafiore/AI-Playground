@@ -16,4 +16,14 @@ public class Unemployed : Job
     }
 
 
+    public override void FindTask()
+    {
+    }
+
+    public override void Update()
+    {
+        Debug.Log("Update() called on Unemployed");
+    }
+
+
 }

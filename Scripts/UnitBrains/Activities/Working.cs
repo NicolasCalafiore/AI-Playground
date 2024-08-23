@@ -15,20 +15,15 @@ public class Working : Activity
 
     public override void Execute()
     {
-        Actor.GetComponent<Unit>().MoveToStructure(Actor.GetComponent<Unit>().job.JobLocation);
     }
 
     public override void Update()
     {
         _TickManager.Tick();
-        if(Vector3.Distance(Actor.transform.position, Actor.job.JobLocation.transform.position) < 5){
-            Actor.EnterStructure(Actor.job.JobLocation);
-        }
-        
+        Actor.job.Update();
     }
 
     public override void TickCycle()
     {
-
     }
 }
