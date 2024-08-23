@@ -8,4 +8,13 @@ public static class IOManager
     {
         return Resources.Load<GameObject>("Prefabs/Unit");
     }
+    public static GameObject GetUniform(string name)
+    {
+        return Resources.Load<GameObject>("Prefabs/" + name);
+    }
+
+    public static GameObject GetPrefab(string name)
+    {
+        return Resources.Load<GameObject>("Prefabs/" + name);
+    }
 }
