@@ -1425,4 +1425,3 @@ Transform:
   - {fileID: 1841996339050770200}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-    - target: {fileID: 6869734006812162287, guid: 0eab049c6195e224bbcea8b6c5e5744b, type: 3}
