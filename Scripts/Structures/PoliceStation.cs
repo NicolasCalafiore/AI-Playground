@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class House : Structure
+public class PoliceStation : Structure
 {
     void Awake (){
         Capacity = 5;

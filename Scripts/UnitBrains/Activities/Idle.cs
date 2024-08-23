@@ -27,6 +27,5 @@ public class Idle : Activity
 
     public override void TickCycle()
     {
-        Debug.Log("Idle Tick Cycle");
     }
 }

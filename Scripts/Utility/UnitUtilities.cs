@@ -33,20 +33,12 @@ public static class UnitUtils
 
     public static bool FindHousing(GameObject unit){
 
-        Debug.Log("Finding housing for unit");
-        Debug.Log("Houses: " + WorldRegister.GetStructures().Count);
-
         foreach(GameObject houseGO in WorldRegister.GetStructures()){
             Structure house = houseGO.GetComponent<Structure>();
-            
-            Debug.Log("House: " + houseGO.name);
-            Debug.Log("House Full: " + house.IsResidentsFull());
-
-
+        
             if(!house.IsResidentsFull()){
                 house.AddResident(unit);
                 unit.GetComponent<Unit>().SetHome(houseGO);
-                Debug.Log("Unit Housed");
                 return true;
             }
         }

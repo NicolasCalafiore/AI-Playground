@@ -13,7 +13,6 @@ public class Eat : Activity
 
     public override void Execute()
     {
-        Debug.Log("Sleeping");
         Actor.MoveToStructure(UnitUtils.FindClosestTag(Actor, "Resturant"));
     }
 
@@ -31,8 +30,7 @@ public class Eat : Activity
     {
         if(IsEating){
             Actor.needs.EnableHungerEffect = false;
-            Debug.Log("Eating Tick");
-            Actor.needs.Hunger -= 2;
+            Actor.needs.Hunger -= 10;
             if(Actor.needs.Hunger <= 0){
                 Actor.ExitStructure();
                 Actor.needs.EnableHungerEffect = true;

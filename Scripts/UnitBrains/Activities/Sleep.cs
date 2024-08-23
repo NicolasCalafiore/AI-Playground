@@ -13,7 +13,6 @@ public class Sleep : Activity
 
     public override void Execute()
     {
-        Debug.Log("Sleeping");
         Actor.MoveToStructure(Actor.GetHome());
     }
 
@@ -31,8 +30,7 @@ public class Sleep : Activity
     {
         if(IsSleeping){
             Actor.needs.EnableSleepEffect = false;
-            Debug.Log("Sleeping Tick");
-            Actor.needs.Sleep -= 2;
+            Actor.needs.Sleep -= 10;
             if(Actor.needs.Sleep <= 0){
                 Actor.ExitStructure();
                 Actor.needs.EnableSleepEffect = true;
