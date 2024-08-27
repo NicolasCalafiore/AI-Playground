@@ -4,52 +4,55 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Needs
+public class Needs : MonoBehaviour
 {
-    public int Sleep = 0;
-    public int Hunger = 0;
-    public int Social = 0;
-    TickManager _TickManager = new TickManager(1);
-    public bool EnableSleepEffect = true;
-    public bool EnableHungerEffect = true;
-    public bool EnableSocialEffect = true;
-    private int SleepDX;
-    private int HungerDX;
-    private int SocialDX;
-    public int SleepThreshold { get; private set; }
-    public int HungerThreshold { get; private set; }
-    public int SocialThreshold { get; private set; }
 
+    float UpdateInterval = 1f;
+    float TimeSinceLastUpdate = 0f;
+    [SerializeField] private int Hunger = 0;
+    [SerializeField] private int Sleep = 0;
+    [SerializeField] private int Social = 0;
+    [SerializeField] private int HungerThreshold = 2;
+    [SerializeField] private int SleepThreshold = 2;
+    
+    void Update(){
 
-
-    public Needs(){
-        _TickManager.Ticked += TickCycle;
-         
-        SleepDX = Random.Range(1, 3);
-        HungerDX = Random.Range(1, 3);
-        SocialDX = Random.Range(1, 3);
-        SleepThreshold = Random.Range(50, 100);
-        HungerThreshold = Random.Range(35, 100);
-        SocialThreshold = Random.Range(20, 100);
+        TimeSinceLastUpdate += Time.deltaTime;
+        if (TimeSinceLastUpdate >= UpdateInterval)
+        {
+            TimeSinceLastUpdate = 0f;
+            Hunger++;
+            Sleep++;
+            Social++;
+        }
     }
 
-    public void UpdateNeeds(){
-        if(EnableSleepEffect)
-            Sleep+=SleepDX;
-
-        if(EnableHungerEffect)
-            Hunger+=HungerDX;
-
-        if(EnableSocialEffect)
-            Social+=SocialDX;
+    public bool IsHungry(){
+        return Hunger > 15;
     }
 
-    public void Update(){
-        _TickManager.Tick();
+    public bool IsSleepy(){
+        return Sleep > 5;
     }
-    public void TickCycle(){
-        UpdateNeeds();
+
+    public void Eat(){
+        Debug.Log("Ate");
+        Hunger -= GetComponent<Unit>().structure.GetComponent<Resturant>().effectValue;
     }
+
+    public void GoToSleep(){
+        Debug.Log("Slept");
+        Sleep -= GetComponent<Unit>().home.sleepValue;
+    }
+
+    public bool HungerIsSatsified(){
+        return Hunger < HungerThreshold;
+    }
+
+    public bool IsFullyRested(){
+        return Sleep < SleepThreshold;
+    }
+
 
 
 

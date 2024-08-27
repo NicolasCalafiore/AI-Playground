@@ -1,27 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class House : Structure
+public class House : Residential
 {
-    void Awake (){
-        Capacity = 5;
-        WorldRegister.RegisterStructure(gameObject);
+    public House(){
+        occupantCapacity = 4;
+        visitorCapacity = 5;
+        sleepValue = 5;
+    }
+
+    public override void Awake(){
+        WorldRegister.RegisterHouse(this);
     }
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+
+
 
 
 
 }
-

@@ -1,63 +1,41 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public abstract class Structure : MonoBehaviour
-{
-    [SerializeField] protected int Capacity;
-    [SerializeField] protected int OccupantNum = 0;
-    [SerializeField] protected int ResidentNum = 0;
-    protected List<GameObject> Residents = new List<GameObject>();
-    protected List<GameObject> Occupants = new List<GameObject>();
+public abstract class Structure : MonoBehaviour{
+    [SerializeField] int occupantCapacityDebug;
+    [SerializeField] int occupancyDebug;
+    protected List<Unit> occupants = new List<Unit>();
+    protected int occupantCapacity;
+    public Structure(){
 
-
-    public bool AddResident(GameObject resident)
-    {
-        if (ResidentNum < Capacity)
-        {
-            ResidentNum++;
-            Residents.Add(resident);
-            return true;
-        }
-        return false;
     }
 
-    public void RemoveResident(GameObject resident)
-    {
-        ResidentNum--;
-        Residents.Remove(resident);
+    public abstract void Awake();
+
+    void Update(){
+        occupantCapacityDebug = occupantCapacity;
+        occupancyDebug = occupants.Count;
     }
 
-    public bool AddOccupant(GameObject occupant)
-    {
-        if (Occupants.Count < Capacity)
-        {
-            OccupantNum++;
-            Occupants.Add(occupant);
-            return true;
-        }
-        return false;
+    public bool IsFull(){
+        return occupants.Count >= occupantCapacity;
     }
 
-    public void RemoveOccupant(GameObject occupant)
-    {
-        OccupantNum--;
-        Occupants.Remove(occupant);
+    public void EnterStructure(Unit unit){
+        occupants.Add(unit);
     }
 
-    public int GetCapacity()
-    {
-        return Capacity;
+    public void ExitStructure(Unit unit){
+        occupants.Remove(unit);
     }
 
-    public List<GameObject> GetOccupants()
-    {
-        return Residents;
+    public void AddOccupant(Unit unit){
+        occupants.Add(unit);    
     }
 
-    public bool IsResidentsFull(){
-        return Residents.Count == Capacity;
-    }
-
+    
 
 }

@@ -11,6 +11,16 @@ public static class UnitUtils
         return Resources.Load<GameObject>("Prefabs/Unit");
     }
 
+    public static bool FindHousing(GameObject unit){
+        House house = WorldRegister.GetAvailableHouse();
+
+        if(house == null)
+            return false;
+        
+        unit.GetComponent<Unit>().home = house;
+        return true;
+    }
+
     public static Vector3 GetValidSpawn(){
         Vector3 spawnPosition;
         bool positionIsValid = false;
@@ -29,19 +39,6 @@ public static class UnitUtils
         return spawnPosition;
     }
 
-    public static bool FindHousing(GameObject unit){
-        foreach(GameObject houseGO in WorldRegister.GetStructures()){
-            Structure house = houseGO.GetComponent<Structure>();
-        
-            if(!house.IsResidentsFull()){
-                house.AddResident(unit);
-                unit.GetComponent<Unit>().SetHome(houseGO);
-                return true;
-            }
-        }
-
-        return false;
-    }
 
     public static Vector3 GetRandomLocationInRadius(Vector3 origin, float radius){
         Vector3 randomPosition = Vector3.zero;

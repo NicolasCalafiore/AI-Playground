@@ -1,27 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class Resturant : Structure
+public class Resturant : Commercial
 {
-    void Awake (){
-        Capacity = 5;
-        WorldRegister.RegisterStructure(gameObject);
-    }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public Resturant(){
+        employeeCapacity = 10;
+        occupantCapacity = 20;
+        effectValue = 5;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public override void Awake(){
+        WorldRegister.RegisterResturant(this);
     }
+
+
+
 
 
 
 }
-

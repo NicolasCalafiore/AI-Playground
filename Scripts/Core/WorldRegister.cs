@@ -4,26 +4,34 @@ using UnityEngine;
 
 public static class WorldRegister
 {
-    private static List<GameObject> houses = new List<GameObject>();
-    private static List<GameObject> resturants = new List<GameObject>();
-    private static List<GameObject> policeStations = new List<GameObject>();
 
-
-    public static void RegisterStructure(GameObject structure)
+    public static List<House> Houses = new List<House>();
+    public static List<Resturant> Resturants = new List<Resturant>();
+    public static void RegisterHouse(House house)
     {
-        if (structure.GetComponent<House>() != null)
-            houses.Add(structure.gameObject);
-
-        if (structure.GetComponent<Resturant>() != null)
-            resturants.Add(structure.gameObject);
-
-        if (structure.GetComponent<PoliceStation>() != null)
-            policeStations.Add(structure.gameObject);
-        
+        Debug.Log("Registering house");
+        Houses.Add(house);
     }
 
-    public static List<GameObject> GetStructures()
+    public static void RegisterResturant(Resturant resturant)
     {
-        return houses;
+        Debug.Log("Registering resturant");
+        Resturants.Add(resturant);
     }
+
+    public static House GetAvailableHouse()
+    {
+        foreach (House house in Houses)
+        {
+            if (!house.IsFull())
+            {
+                return house;
+            }
+        }
+        return null;
+    }
+
+    
+
+
 }

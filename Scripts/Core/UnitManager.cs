@@ -14,18 +14,7 @@ public class UnitManager : MonoBehaviour
     }
 
     void SpawnUnits(){
-        for (int i = 0; i < unitCount; i++)
-        {
-            Vector3 spawnPosition = UnitUtils.GetValidSpawn();
-            GameObject unitObject = Instantiate(IOManager.GetUnitPrefab(), spawnPosition, Quaternion.identity);
-        }
 
-        for (int i = 0; i < policeCount; i++)
-        {
-            Vector3 spawnPosition = UnitUtils.GetValidSpawn();
-            GameObject unitObject = Instantiate(IOManager.GetUnitPrefab(), spawnPosition, Quaternion.identity);
-            unitObject.GetComponent<Unit>().job = new Police(unitObject);
-        }
         
     }
 

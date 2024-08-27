@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3946869051851230576}
   - component: {fileID: -9176079484709453213}
-  - component: {fileID: 5762863949545892296}
+  - component: {fileID: 1340469155159575997}
   m_Layer: 0
   m_Name: Resturant
   m_TagString: Resturant
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
---- !u!114 &5762863949545892296
+--- !u!114 &1340469155159575997
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,9 +174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e07483810158b41826621e9d8b78af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Capacity: 0
-  OccupantNum: 0
-  ResidentNum: 0
 --- !u!1 &3040213908401519464
 GameObject:
   m_ObjectHideFlags: 0

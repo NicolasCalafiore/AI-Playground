@@ -18,7 +18,7 @@ public class TickManager
         if (TimeSinceLastTick >= TickInterval)
         {
             Ticked?.Invoke();
-            TimeSinceLastTick = 0f; // Reset the time since the last tick
+            TimeSinceLastTick = 0f;
         }
     }
 }

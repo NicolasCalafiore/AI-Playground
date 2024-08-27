@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4494941792884808375}
   - component: {fileID: 5938251455967540123}
-  - component: {fileID: 653964620792283173}
+  - component: {fileID: 8990642270825818699}
   m_Layer: 0
   m_Name: House
   m_TagString: House
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
---- !u!114 &653964620792283173
+--- !u!114 &8990642270825818699
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,10 +169,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1556526316840810232}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dda24daa73d4c449992fb464faad9de, type: 3}
+  m_Script: {fileID: 11500000, guid: ec96f132022ca2541be4ac51d4a4c2f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capacity: 0
+  occupantCapacityDebug: 0
+  occupancyDebug: 0
 --- !u!1 &4567794346130211123
 GameObject:
   m_ObjectHideFlags: 0

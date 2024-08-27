@@ -5,162 +5,62 @@ using UnityEngine.AI;
 
 public class Unit : MonoBehaviour
 {
-    
-    GameObject Home = null;
-    NavMeshAgent Agent;
-    ActivityManager _ActivityManager;
-    public Needs needs;
-    [SerializeField] private int Hunger_Debug;
-    [SerializeField] private int Sleep_Debug;
-    [SerializeField] private int Social_Debug;
-    [SerializeField] private string activity;
-    [SerializeField] private string jobStr;
-    [SerializeField] private bool MakeSleepy = false;
-    [SerializeField] private bool MakeHungry = false;
-    [SerializeField] private bool MakeSocial = false;
-    Structure occupiedStructure = null;
-    public GameObject targetStructure = null;
-    public Job job;
+    bool isInside = false;
+    public Structure structure;
+    public Residential home;
 
     void Awake(){
-        job = null;
-        FindComponents();
-        needs = new Needs();
-        _ActivityManager.SetActivity();
 
-        if(!UnitUtils.FindHousing(gameObject))
-            Destroy(gameObject);
     }
 
     void Start()
     {
+        if(!UnitUtils.FindHousing(gameObject))
+            Destroy(gameObject);
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        DebugOverrides();
-
-        if(job is not null && !job.isWorking && TimeManager.instance.hour >= job.StartHour && TimeManager.instance.hour < job.EndHour)
-            _ActivityManager.SetActivity();
-
-        _ActivityManager.Update();
-        needs.Update();
+      
     }
 
-    void DebugOverrides(){
-
-        Social_Debug = needs.Social;
-        Hunger_Debug = needs.Hunger;
-        Sleep_Debug = needs.Sleep;
-
-        if(job == null) jobStr = "Unemployed";
-        else
-            jobStr = job.GetType().Name;
-            
-        activity = _ActivityManager.CurrentActivity.GetType().Name;
-
-        if(MakeHungry)
-            needs.Hunger = needs.HungerThreshold + 1;
-        if(MakeSleepy)
-            needs.Sleep = needs.SleepThreshold + 1;
-        if(MakeSocial)
-            needs.Social = needs.SocialThreshold + 1;
-
-
-        MakeHungry = false;
-        MakeSleepy = false;
-        MakeSocial = false;
+    public void EnterStructure(Structure structure){
+        Hide();
+        structure.GetComponent<Structure>().EnterStructure(this);
+        isInside = true;
     }
 
-    void FindComponents(){
-
-        Agent = GetComponent<NavMeshAgent>();
-        _ActivityManager = new ActivityManager(this);
-    }
-
-    public void SetHome(GameObject home){
-
-        this.Home = home;
-    }
-
-    public void MoveToStructure(GameObject structure){
-
-        Agent.SetDestination(structure.transform.Find("Door").position);
-        Agent.SetDestination(structure.transform.Find("Door").position);
-        targetStructure = structure;
-    }
-
-    public Vector3 StructureDoorPosition(GameObject structure){
-
+    public Vector3 MoveToStructure(Structure structure){
+        GetComponent<NavMeshAgent>().SetDestination(structure.transform.Find("Door").position);
+        this.structure = structure;
         return structure.transform.Find("Door").position;
     }
 
-    public void MoveToPosition(Vector3 position){
-
-        Agent.SetDestination(position);
-    }
-
-    public void EnterStructure(GameObject structureGO){
-  
-
-        Structure structure = structureGO.GetComponent<Structure>();
-        SetVisiblity(false);
-        structure.AddOccupant(gameObject);
-        occupiedStructure = structure;
-    }
-
     public void ExitStructure(){
-
-
-        occupiedStructure.RemoveOccupant(gameObject);
-        SetVisiblity(true);
+        Show();
+        structure.GetComponent<Structure>().ExitStructure(this);
+        isInside = false;
     }
 
-    public void Stop(){
-
-
-        Agent.ResetPath();
-        Agent.speed = 0;
+    public void GoToVectorPosition(Vector3 position){
+        GetComponent<NavMeshAgent>().SetDestination(position);
     }
 
-    public void WearOutfit(bool isWearing){
-
-
-        if(isWearing){
-            GameObject outfit = Instantiate(job.Outfit);
-            outfit.transform.SetParent(transform);
-            outfit.transform.localPosition = Vector3.zero;
-        }
-        else{
-            foreach (Transform child in transform)
-            {
-                if(child.gameObject.tag == "Outfit")
-                    Destroy(child.gameObject);
-            }
+    public void Hide(){
+        foreach(Transform child in transform){
+            child.gameObject.SetActive(false);
         }
     }
 
-    void SetVisiblity(bool visible){
-
-
-        if(visible){
-            foreach (Transform child in transform)
-            {
-                child.gameObject.SetActive(true);
-            }
-        }
-        else{
-            foreach (Transform child in transform)
-            {
-                child.gameObject.SetActive(false);
-            }
+    public void Show(){
+        foreach(Transform child in transform){
+            child.gameObject.SetActive(true);
         }
     }
 
-    public GameObject GetHome(){
-        return Home;
-    }
 
+
+    
 }
