@@ -9,7 +9,7 @@ public class Resturant : Commercial
     public Resturant(){
         employeeCapacity = 10;
         occupantCapacity = 20;
-        effectValue = 5;
+        effectValue = 15;
     }
 
     public override void Awake(){

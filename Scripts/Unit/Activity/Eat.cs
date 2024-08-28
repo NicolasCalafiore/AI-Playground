@@ -26,6 +26,7 @@ public override void Update(){
     if(distanceToTarget < 3 && !IsAtResturant){
         unit.EnterStructure(GameObject.Find("Resturant").GetComponent<Structure>());
         IsAtResturant = true;
+        unit.GetComponent<Needs>().hunger.isActive = false;
     }
 
     if(TimeSinceLastUpdate >= UpdateInterval && IsAtResturant){
@@ -38,11 +39,12 @@ public override void Update(){
     }
 }
 
-void EatFood(){
+    void EatFood(){
     unit.GetComponent<Needs>().Eat();
-}
+    }
 
     public override void End(){
+        unit.GetComponent<Needs>().hunger.isActive = true;
         unit.ExitStructure();
         IsFinished = true;
     }

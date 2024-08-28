@@ -9,7 +9,7 @@ public class House : Residential
     public House(){
         occupantCapacity = 4;
         visitorCapacity = 5;
-        sleepValue = 5;
+        sleepValue = 15;
     }
 
     public override void Awake(){

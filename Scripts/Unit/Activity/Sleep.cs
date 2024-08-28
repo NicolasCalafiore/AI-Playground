@@ -25,6 +25,7 @@ public class Sleep: Activity{
         if(TimeSinceLastUpdate >= UpdateInterval && IsSleeping){
             TimeSinceLastUpdate = 0f;
             unit.GetComponent<Needs>().GoToSleep();
+            unit.GetComponent<Needs>().energy.isActive = false;
         }
 
         if(unit.GetComponent<Needs>().IsFullyRested()){
@@ -35,5 +36,6 @@ public class Sleep: Activity{
     public override void End(){
         IsFinished = true;
         unit.ExitStructure();
+        unit.GetComponent<Needs>().energy.isActive = true;
     }
 }
