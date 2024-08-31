@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6869734006812162287}
   - component: {fileID: 5403401162218233491}
   - component: {fileID: 4740191844353909654}
+  - component: {fileID: 4957156146221646710}
   - component: {fileID: 2764277804932486277}
   - component: {fileID: 2518151353536297906}
   m_Layer: 0
@@ -70,6 +71,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12a04c168e5cd494baf987dc28bf8d6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  structure: {fileID: 0}
+  home: {fileID: 0}
+  jobStr: 
+--- !u!114 &4957156146221646710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485463234808819564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b475183823a526b44b2fe93e6889c76f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2764277804932486277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,9 +98,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61745d84966bcfc4b8bb1489a721e809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hunger: 0
-  Sleep: 0
-  Social: 0
+  hungerValue: 0
+  hungerRate: 0
+  hungerThreshold: 0
+  hungerSatisfied: 0
+  HungerisActive: 0
+  energyValue: 0
+  energyRate: 0
+  energyThreshold: 0
+  energySatisfied: 0
+  EnergyisActive: 0
+  socialValue: 0
+  socialRate: 0
+  socialThreshold: 0
+  socialSatisfied: 0
+  SocialisActive: 0
 --- !u!114 &2518151353536297906
 MonoBehaviour:
   m_ObjectHideFlags: 0

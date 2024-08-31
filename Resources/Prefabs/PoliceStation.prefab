@@ -2293,7 +2293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4641511678640722303}
   - component: {fileID: 2183572635131377724}
-  - component: {fileID: 7444664644403158177}
+  - component: {fileID: 4836520531731080455}
   m_Layer: 0
   m_Name: PoliceStation
   m_TagString: Police
@@ -2340,7 +2340,7 @@ MonoBehaviour:
   m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
---- !u!114 &7444664644403158177
+--- !u!114 &4836520531731080455
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2349,12 +2349,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8252499032237050869}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae217ea8f8eb8b942ab07e9d2579b7f7, type: 3}
+  m_Script: {fileID: 11500000, guid: af2f5e7e85b122444b51b861bc6f7b6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Capacity: 0
-  OccupantNum: 0
-  ResidentNum: 0
+  occupantCapacityDebug: 0
+  occupancyDebug: 0
+  effectValue: 20
 --- !u!1 &8255137129616475859
 GameObject:
   m_ObjectHideFlags: 0

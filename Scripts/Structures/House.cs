@@ -7,14 +7,13 @@ using UnityEngine.AI;
 public class House : Residential
 {
     public House(){
-        occupantCapacity = 4;
+        occupantCapacity = 5;
         visitorCapacity = 5;
         sleepValue = 15;
     }
 
-    public override void Awake(){
-        WorldRegister.RegisterHouse(this);
-    }
+    public override void Awake() =>  WorldRegister.RegisterHouse(this);
+    
     
 
 

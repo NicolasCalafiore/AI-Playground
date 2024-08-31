@@ -6,8 +6,10 @@ using UnityEngine.AI;
 public class Unit : MonoBehaviour
 {
     bool isInside = false;
-    public Structure structure;
+    public Structure targetStructure;
+    public Vector3 targetPosition;
     public Residential home;
+    public string jobStr;
 
     void Awake(){
 
@@ -17,30 +19,32 @@ public class Unit : MonoBehaviour
     {
         if(!UnitUtils.FindHousing(gameObject))
             Destroy(gameObject);
+
     }
 
 
     // Update is called once per frame
     void Update()
     {
-      
     }
 
     public void EnterStructure(Structure structure){
         Hide();
         structure.GetComponent<Structure>().EnterStructure(this);
+        this.targetStructure = structure;
         isInside = true;
     }
 
     public Vector3 MoveToStructure(Structure structure){
         GetComponent<NavMeshAgent>().SetDestination(structure.transform.Find("Door").position);
-        this.structure = structure;
-        return structure.transform.Find("Door").position;
+        this.targetStructure = structure;
+        targetPosition = structure.transform.Find("Door").position;
+        return targetPosition;
     }
 
     public void ExitStructure(){
         Show();
-        structure.GetComponent<Structure>().ExitStructure(this);
+        targetStructure.GetComponent<Structure>().ExitStructure(this);
         isInside = false;
     }
 
@@ -55,10 +59,11 @@ public class Unit : MonoBehaviour
     }
 
     public void Show(){
-        foreach(Transform child in transform){
+        foreach(Transform child in transform)
             child.gameObject.SetActive(true);
-        }
+        
     }
+
 
 
 

@@ -14,10 +14,14 @@ public class ActivityManager : MonoBehaviour
 
     void Start()
     {
-        if(gameObject.GetComponent<Needs>().IsHungry())
+        if(GetComponent<Job>().job != null && GetComponent<Job>().job.IsWorkingHours())
+            currentActivity = new Working(gameObject.GetComponent<Unit>());
+        else if(gameObject.GetComponent<Needs>().IsHungry())
             currentActivity = new Eat(gameObject.GetComponent<Unit>());
         else if(gameObject.GetComponent<Needs>().IsSleepy())
             currentActivity = new Sleep(gameObject.GetComponent<Unit>());
+        else if(gameObject.GetComponent<Needs>().IsSocial())
+            currentActivity = new Socialize(gameObject.GetComponent<Unit>());
         else
             currentActivity = new Idle(gameObject.GetComponent<Unit>());
             
@@ -27,8 +31,7 @@ public class ActivityManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if(currentActivity.IsFinished)
+    {        if(currentActivity.IsFinished)
             Start();
         
         currentActivity.Update();

@@ -21,6 +21,7 @@ public abstract class Structure : MonoBehaviour{
     }
 
     public bool IsFull(){
+        Debug.Log("Occupants: " + occupants.Count + " Capacity: " + occupantCapacity);
         return occupants.Count >= occupantCapacity;
     }
 

@@ -17,6 +17,7 @@ public static class UnitUtils
         if(house == null)
             return false;
         
+        house.AddOccupant(unit.GetComponent<Unit>());
         unit.GetComponent<Unit>().home = house;
         return true;
     }
