@@ -14,28 +14,27 @@ public abstract class Structure : MonoBehaviour{
     }
 
     public abstract void Awake();
+    public abstract void UpdateOccupancy();
 
     void Update(){
         occupantCapacityDebug = occupantCapacity;
         occupancyDebug = occupants.Count;
     }
 
-    public bool IsFull(){
-        Debug.Log("Occupants: " + occupants.Count + " Capacity: " + occupantCapacity);
-        return occupants.Count >= occupantCapacity;
-    }
-
+    public bool IsFull() => occupants.Count >= occupantCapacity;
     public void EnterStructure(Unit unit){
         occupants.Add(unit);
+        UpdateOccupancy();
     }
-
     public void ExitStructure(Unit unit){
         occupants.Remove(unit);
+        UpdateOccupancy();
     }
-
     public void AddOccupant(Unit unit){
         occupants.Add(unit);    
+        UpdateOccupancy();
     }
+    
 
     
 

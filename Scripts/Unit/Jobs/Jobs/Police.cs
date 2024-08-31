@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class Police:  JobBase{
 
     public Police(Unit unit): base(unit){
+
         start = 0;
         end = 24;
         Location = WorldRegister.GetUnderstaffedPoliceStation().gameObject;
@@ -16,9 +17,9 @@ public class Police:  JobBase{
     }
 
     public override void Update(){
-        if(task == null || task.isFinished){
+
+        if(task == null || task.isFinished)
             task = new Patrol(unit);
-        }
         
         task.Update();
     }

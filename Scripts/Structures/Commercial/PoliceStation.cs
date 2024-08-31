@@ -4,19 +4,21 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Center : Commercial
+public class PoliceStation : Commercial
 {
-    public Center(){
+    public PoliceStation(){
         employeeCapacity = 10;
         occupantCapacity = 20;
         effectValue = 20;
     }
 
-    public override void Awake(){
-        WorldRegister.RegisterCenter(this);
+    public override void Awake() => WorldRegister.RegisterPoliceStation(this);
+    
+
+    public override void UpdateOccupancy()
+    {
+
     }
-
-
 
 
 

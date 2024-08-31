@@ -13,8 +13,13 @@ public class House : Residential
     }
 
     public override void Awake() =>  WorldRegister.RegisterHouse(this);
-    
-    
+
+    public override void UpdateOccupancy()
+    {
+
+    }
+
+
 
 
 

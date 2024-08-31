@@ -12,12 +12,13 @@ public class Sleep: Activity{
         
     }
     public override void Start(){
-        TargetVector = unit.MoveToStructure(unit.home);
+        unit.MoveToStructure(unit.home);
     }
     public override void Update(){
+
         TimeSinceLastUpdate += Time.deltaTime;
 
-        if(Vector3.Distance(unit.gameObject.transform.position, TargetVector) < 3 && !IsSleeping){
+        if(Vector3.Distance(unit.gameObject.transform.position, unit.targetPosition) < 3 && !IsSleeping){
             IsSleeping = true;
             unit.EnterStructure(unit.home);
         }
@@ -34,6 +35,7 @@ public class Sleep: Activity{
         
     }
     public override void End(){
+        
         IsFinished = true;
         unit.ExitStructure();
         unit.GetComponent<Needs>().energy.isActive = true;

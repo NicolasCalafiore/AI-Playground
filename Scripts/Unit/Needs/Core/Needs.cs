@@ -34,15 +34,15 @@ public class Needs : MonoBehaviour
 
     void Awake(){
         //int value, int rate, int threshold, int satisfied) : base(value, rate, threshold, satisfied
-        int HungerRate = Random.Range(1, 7);
+        int HungerRate = Random.Range(1, 3);
         int HungerSatisfied = Random.Range(0, 20);
         int HungerThreshold = Random.Range(40, 80);
 
         int SleepThreshold = Random.Range(70, 100);
-        int SleepRate = Random.Range(1, 7);
+        int SleepRate = Random.Range(1, 3);
         int SleepSatisfied = Random.Range(0, 20);
 
-        int SocialRate = Random.Range(1, 7);
+        int SocialRate = Random.Range(1, 3);
         int SocialSatisfied = Random.Range(0, 20);
         int SocialThreshold = Random.Range(40, 80);
 
@@ -91,10 +91,8 @@ public class Needs : MonoBehaviour
     public bool IsSocial() => social.IsNeeded();
     public void Eat() => hunger.Decrement(GetComponent<Unit>().targetStructure.GetComponent<Resturant>().effectValue);
     public void GoToSleep() => energy.Decrement(GetComponent<Unit>().home.sleepValue);
-    public void Socialize(){
-        Debug.Log("Decrement by " + GetComponent<Unit>().targetStructure.GetComponent<Center>().effectValue);
-        social.Decrement(GetComponent<Unit>().targetStructure.GetComponent<Center>().effectValue);
-    }
+    public void Socialize() => social.Decrement(GetComponent<Unit>().targetStructure.GetComponent<Center>().effectValue);
+    
     public bool HungerIsSatsified() => hunger.IsSatisfied(hunger.value);
     public bool IsFullyRested() => energy.IsSatisfied(energy.value);
     public bool IsSocialized() => social.IsSatisfied(social.value);

@@ -6,29 +6,24 @@ using UnityEngine.AI;
 public class Socialize: Activity{
 
     private bool isSocializing = false;
-    GameObject center;
     float UpdateInterval = 1f;
     float TimeSinceLastUpdate = 0f;
     public Socialize(Unit unit): base(unit){
         
     }
     public override void Start(){
-        TargetVector = UnitUtils.FindClosestTag(unit, "Center").transform.position;
-        center = UnitUtils.FindClosestTag(unit, "Center");
-
-        unit.GetComponent<NavMeshAgent>().SetDestination(TargetVector);
+        unit.MoveToStructure(UnitUtils.FindClosestTag(unit, "Center").GetComponent<Structure>());
     }
     public override void Update(){
+
         TimeSinceLastUpdate += Time.deltaTime;
         
-        if(Vector3.Distance(unit.gameObject.transform.position, TargetVector) < 5 && !isSocializing){
+        if(Vector3.Distance(unit.gameObject.transform.position, unit.targetPosition) < 5 && !isSocializing){
             isSocializing = true;
-            unit.EnterStructure(center.GetComponent<Structure>());
-            unit.Show();
+            unit.EnterStructure(unit.targetStructure);
         }
 
         if(TimeSinceLastUpdate >= UpdateInterval && isSocializing){
-            Debug.Log("Socializing Update");
             TimeSinceLastUpdate = 0f;
             unit.GetComponent<Needs>().Socialize();
             unit.GetComponent<Needs>().social.isActive = false;
@@ -40,7 +35,9 @@ public class Socialize: Activity{
 
     }
     public override void End(){
+
         IsFinished = true;
-         unit.GetComponent<Needs>().social.isActive = true;
+        unit.GetComponent<Needs>().social.isActive = true;
+        unit.ExitStructure();
     }
 }

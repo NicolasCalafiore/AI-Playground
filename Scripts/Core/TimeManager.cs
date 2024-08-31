@@ -21,10 +21,10 @@ public class TimeManager : MonoBehaviour
         instance = this;
     }
 
-    // Update is called once per frame
     void Update()
     {
         time += Time.deltaTime * UniversalGameSpeed;
+
         if(time >= minuteLength){
             time = 0f;
             minute++;
@@ -37,21 +37,13 @@ public class TimeManager : MonoBehaviour
                 }
             }
         }
+
         GameObject.Find("Time").GetComponent<TMPro.TextMeshProUGUI>().text = "Day: " + day + " Hour: " + hour + " Minute: " + minute;
-
-
     }
     
-    public void SetX1Speed(){
-        UniversalGameSpeed = 1f;
-    }
-
-    public void SetX4Speed(){
-        UniversalGameSpeed = 4f;
-    }
-
-    public void SetX8Speed(){
-        UniversalGameSpeed = 8f;
-    }
+    public void SetX1Speed() => UniversalGameSpeed = 1f;
+    public void SetX4Speed() => UniversalGameSpeed = 4f;
+    public void SetX8Speed() =>  UniversalGameSpeed = 8f;
+    
 
 }

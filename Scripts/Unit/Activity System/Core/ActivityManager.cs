@@ -14,6 +14,7 @@ public class ActivityManager : MonoBehaviour
 
     void Start()
     {
+
         if(GetComponent<Job>().job != null && GetComponent<Job>().job.IsWorkingHours())
             currentActivity = new Working(gameObject.GetComponent<Unit>());
         else if(gameObject.GetComponent<Needs>().IsHungry())
@@ -28,10 +29,9 @@ public class ActivityManager : MonoBehaviour
         currentActivity.Start();
     }
 
-
-    // Update is called once per frame
-    void Update()
-    {        if(currentActivity.IsFinished)
+    void Update(){
+        
+        if(currentActivity.IsFinished)
             Start();
         
         currentActivity.Update();

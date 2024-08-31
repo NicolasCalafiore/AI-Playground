@@ -14,6 +14,7 @@ public abstract class JobBase{
 
 
     public JobBase( Unit unit){
+        
         this.unit = unit;
     }
 

@@ -9,15 +9,17 @@ public class Idle: Activity{
         
     }
     public override void Start(){
-        TargetVector = UnitUtils.GetRandomLocationInRadius(unit.gameObject.transform.position, 15);
-        unit.GetComponent<NavMeshAgent>().SetDestination(TargetVector);
+
+        unit.GoToVectorPosition(UnitUtils.GetRandomLocationInRadius(unit.gameObject.transform.position, 15));
     }
     public override void Update(){
-        if(Vector3.Distance(unit.gameObject.transform.position, TargetVector) < 1){
+
+        if(Vector3.Distance(unit.gameObject.transform.position, unit.targetPosition) < 1)
            End();
-        }
+        
     }
     public override void End(){
+        
         IsFinished = true;
     }
 }

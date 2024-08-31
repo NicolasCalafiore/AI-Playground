@@ -16,20 +16,17 @@ public class Need{
         this.satisfied = satisfied;
     }
 
-    public bool IsNeeded(){
-        return value > threshold;
-    }
+    public bool IsNeeded() => value > threshold;
     
-    public bool IsSatisfied(int value){
-        return value < satisfied;
-    }   
+    
+    public bool IsSatisfied(int value) => value < satisfied;
+    
 
     public void Increment(){
         if(isActive)
             this.value += rate;
     }
 
-    public void Decrement(int value){
-        this.value -= value;
-    }
+    public void Decrement(int value) => this.value -= value;
+    
 }
