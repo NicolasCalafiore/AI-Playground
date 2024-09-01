@@ -93,6 +93,7 @@ public class Needs : MonoBehaviour
     public void GoToSleep() => energy.Decrement(GetComponent<Unit>().home.sleepValue);
     public void Socialize() => social.Decrement(GetComponent<Unit>().targetStructure.GetComponent<Center>().effectValue);
     
+    
     public bool HungerIsSatsified() => hunger.IsSatisfied(hunger.value);
     public bool IsFullyRested() => energy.IsSatisfied(energy.value);
     public bool IsSocialized() => social.IsSatisfied(social.value);

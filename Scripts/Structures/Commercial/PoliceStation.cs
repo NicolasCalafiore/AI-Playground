@@ -6,13 +6,15 @@ using UnityEngine.AI;
 
 public class PoliceStation : Commercial
 {
-    public PoliceStation(){
+
+    public override void Awake(){
+
         employeeCapacity = 10;
         occupantCapacity = 20;
         effectValue = 20;
-    }
 
-    public override void Awake() => WorldRegister.RegisterPoliceStation(this);
+        WorldRegister.RegisterPoliceStation(this);
+    }
     
 
     public override void UpdateOccupancy()

@@ -12,8 +12,11 @@ public class Police:  JobBase{
         end = 24;
         Location = WorldRegister.GetUnderstaffedPoliceStation().gameObject;
         structure = Location.GetComponent<Structure>();
+        if(Location == null)
+            GameObject.Destroy(unit.gameObject);
         uniform = Resources.Load("Prefabs/Outfits/Police") as GameObject;
         task = null;
+        isInside = false;
     }
 
     public override void Update(){

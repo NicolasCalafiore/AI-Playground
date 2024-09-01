@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Eat: Activity{
 
-    float UpdateInterval = 1f;
+    float UpdateInterval = 2f;
     float TimeSinceLastUpdate = 0f;
     bool IsAtResturant;
     

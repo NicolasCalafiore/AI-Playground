@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public abstract class JobTask{   
     public bool isFinished = false;
-    public Vector3 targetVector;
     protected Unit unit;
     
     public JobTask(Unit unit){

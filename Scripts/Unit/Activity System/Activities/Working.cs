@@ -17,24 +17,36 @@ public class Working: Activity{
         unit.MoveToStructure(unit.GetComponent<Job>().job.Location.GetComponent<Structure>());
         stage = Stage.GoingToWork;
 
-        GameObject outfitGO = GameObject.Instantiate(unit.GetComponent<Job>().job.uniform, unit.gameObject.transform);
-        outfitGO.transform.localPosition = Vector3.zero;
+        unit.SetOutfit(unit.GetComponent<Job>().job.uniform);
+        unit.ShowOutfit();
     }
     public override void Update(){
 
         TimeSinceLastUpdate += Time.deltaTime;
         
-        if(Vector3.Distance(unit.gameObject.transform.position, unit.targetPosition) < 5 && stage == Stage.GoingToWork)
+        if(Vector3.Distance(unit.gameObject.transform.position, unit.targetPosition) < 5 && stage == Stage.GoingToWork){
             stage = Stage.Working;
+            if(unit.GetComponent<Job>().job.isInside) 
+                unit.EnterStructure(unit.GetComponent<Job>().job.Location.GetComponent<Structure>());
+        }
 
         if(TimeSinceLastUpdate >= UpdateInterval && stage == Stage.Working){
             TimeSinceLastUpdate = 0f;
             unit.GetComponent<Job>().WorkUpdate();
         }
+
+        if(!unit.GetComponent<Job>().job.IsWorkingHours())
+            End();
+        
     }
     public override void End(){
         
         IsFinished = true;
-         unit.GetComponent<Needs>().social.isActive = true;
+        unit.GetComponent<Needs>().social.isActive = true;
+        if(unit.GetComponent<Job>().job.isInside) 
+            unit.ExitStructure();
+
+        unit.RemoveOutfit();
+
     }
 }

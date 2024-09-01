@@ -33,6 +33,15 @@ public static class WorldRegister
         return null;
     }
 
+    public static Resturant GetUnderstaffedResturant()
+    {
+        foreach (Resturant resturant in Resturants)
+            if (!resturant.IsFull())
+                return resturant;
+        
+        return null;
+    }
+
     
 
 

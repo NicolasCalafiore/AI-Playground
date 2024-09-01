@@ -21,6 +21,8 @@ public abstract class Commercial : Structure{
     
     public void EnterCustomer(Unit unit) => occupants.Add(unit);
     public void ExitCustomer(Unit unit) => occupants.Remove(unit);
+
+    public bool StaffIsFull() => employees.Count >= employeeCapacity;
     
 
 }

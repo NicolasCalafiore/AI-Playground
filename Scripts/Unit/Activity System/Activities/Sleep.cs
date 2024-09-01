@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Sleep: Activity{
-    float UpdateInterval = 1f;
+    float UpdateInterval = 2f;
     float TimeSinceLastUpdate = 0f;
     bool IsSleeping = false;
 

@@ -12,7 +12,14 @@ public class House : Residential
         sleepValue = 15;
     }
 
-    public override void Awake() =>  WorldRegister.RegisterHouse(this);
+    public override void Awake(){
+
+        occupantCapacity = 5;
+        visitorCapacity = 5;
+        sleepValue = 15;
+
+        WorldRegister.RegisterHouse(this);
+    }
 
     public override void UpdateOccupancy()
     {

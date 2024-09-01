@@ -11,7 +11,7 @@ public abstract class JobBase{
     protected JobTask task;
     protected Structure structure;
     protected Unit unit;
-
+    public bool isInside;
 
     public JobBase( Unit unit){
         

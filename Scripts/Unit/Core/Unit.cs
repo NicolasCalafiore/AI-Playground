@@ -13,6 +13,7 @@ public class Unit : MonoBehaviour
     [SerializeField] bool MakeHungry;
     [SerializeField] bool MakeTired;
     [SerializeField] bool MakeSocial;
+    private GameObject instantiatedOutfit;
 
     void Awake(){
 
@@ -89,7 +90,29 @@ public class Unit : MonoBehaviour
         MakeSocial = false;
     }
 
+    public void SetOutfit(GameObject outfitPrefab){
+        if (instantiatedOutfit != null)
+        {
+            Destroy(instantiatedOutfit);  // Destroy any existing outfit
+        }
+        instantiatedOutfit = Instantiate(outfitPrefab, gameObject.transform);
+        instantiatedOutfit.transform.localPosition = Vector3.zero;
+    }
 
+    public void ShowOutfit(){
+        if (instantiatedOutfit != null)
+        {
+            instantiatedOutfit.SetActive(true);
+        }
+    }
+
+    public void RemoveOutfit(){
+        if (instantiatedOutfit != null)
+        {
+            Destroy(instantiatedOutfit);
+            instantiatedOutfit = null;  // Reset the reference
+        }
+    }
 
     
 }

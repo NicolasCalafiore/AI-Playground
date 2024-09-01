@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Socialize: Activity{
 
     private bool isSocializing = false;
-    float UpdateInterval = 1f;
+    float UpdateInterval = 2f;
     float TimeSinceLastUpdate = 0f;
     public Socialize(Unit unit): base(unit){
         

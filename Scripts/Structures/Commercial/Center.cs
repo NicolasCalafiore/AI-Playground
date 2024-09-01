@@ -8,12 +8,15 @@ public class Center : Commercial
 {
     List<GameObject> bodies = new List<GameObject>();
     public Center(){
-        employeeCapacity = 10;
-        occupantCapacity = 20;
-        effectValue = 7;
+
     }
 
     public override void Awake(){
+        
+        employeeCapacity = 10;
+        occupantCapacity = 20;
+        effectValue = 7;
+
         WorldRegister.RegisterCenter(this);
 
         GameObject bodiesObject = GameObject.Find("Units");
@@ -28,13 +31,17 @@ public class Center : Commercial
 
     public override void UpdateOccupancy()
     {
-        foreach(GameObject body in bodies){
-            body.SetActive(false);
-        }
-
-        for(int i = 0; i < occupants.Count; i++){
-            if(i > 6) break;
+        int maxVisibleBodies = Mathf.Min(occupants.Count, 7);
+        for (int i = 0; i < bodies.Count; i++)
+        {
+            if (i < maxVisibleBodies)
+            {
             bodies[i].SetActive(true);
+            }
+            else
+            {
+            bodies[i].SetActive(false);
+            }
         }
     }
 
